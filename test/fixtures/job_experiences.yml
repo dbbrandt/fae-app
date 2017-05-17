@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  order: 1
+  body: MyText
+  job_link: MyText
+  date: 2017-05-16
+
+two:
+  title: MyString
+  order: 1
+  body: MyText
+  job_link: MyText
+  date: 2017-05-16

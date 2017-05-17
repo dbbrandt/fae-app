@@ -1,0 +1,19 @@
+== render 'static_pages/responsive_banner', { title: @item.title, intro: @item.intro.content }
+div class="row spotlight-row"
+  div class="columns small-12 column-2 large-12 medium-12"
+    div class="container about-container"
+      h1 class="quote"
+        font face="Roboto, sans-serif"
+          span class="heading-text-5" #{@item.headline.content}
+      div class="responsive-picture quote-picture"
+        picture
+          img title="#{@item.hero_image.alt}" alt="#{@item.hero_image.alt}" srcset="#{@item.hero_image.asset.url}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+      p class="paragraph paragraph-1"
+        br
+      ul class="unorder-list-blue" #{markdown @item.body.content}
+      div class="container container-2"
+        a href="#{@item.profile_link.content}" class="responsive-picture picture-link-1"
+          picture
+            img title="#{@item.profile_image.alt}" alt="#{@item.profile_image.alt}" srcset="#{@item.profile_image.asset.url}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+
+      

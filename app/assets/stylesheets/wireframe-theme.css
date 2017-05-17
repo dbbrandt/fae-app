@@ -1,0 +1,358 @@
+
+/************************************************
+ General Default Styles
+************************************************/
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+p,
+blockquote,
+th,
+td,
+button,
+input,
+select,
+textarea {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+/************************************************
+ Grid Default Styles
+************************************************/
+body {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  max-width: none;
+  margin: 0 auto;
+  position: relative;
+}
+.row {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+}
+[class*=column],
+.subgrid {
+  background-color: rgba(255, 255, 255, 0);
+}
+.subgrid,
+.container,
+.container-fluid,
+.form-container,
+.link-container,
+[class*=callout] {
+  min-width: 10px;
+}
+.link-container {
+  display: block;
+}
+li.list-item-link {
+  width: auto;
+  max-width: none;
+  min-width: 0;
+  min-height: 0;
+  background-color: transparent;
+}
+/************************************************
+ Images Default Styles
+************************************************/
+img.image-1-1,
+img.image-2-1,
+img.image-1-2,
+img.image-3-2,
+img.image-4-3,
+img.square,
+img.skyscraper,
+img.leaderboard,
+img.rectangle,
+img.map,
+img.logo {
+  width: 100%;
+  max-width: 200px;
+  display: block;
+}
+img.square {
+  max-width: 400px;
+}
+img.skyscraper {
+  max-width: 200px;
+}
+img.leaderboard {
+  max-width: 300px;
+}
+img.rectangle {
+  max-width: 200px;
+}
+img.map {
+  max-width: 400px;
+}
+img.logo {
+  max-width: 200px;
+}
+.responsive-image {
+  height: auto;
+  overflow: hidden;
+  width: 100%;
+  max-width: 200px;
+  display: block;
+}
+.responsive-image div {
+  max-width: none;
+  height: auto;
+}
+.responsive-image div img {
+  width: 100%;
+}
+.responsive-picture {
+  height: auto;
+  overflow: hidden;
+  width: 100%;
+  max-width: 200px;
+  display: block;
+}
+.responsive-picture picture {
+  max-width: none;
+  height: auto;
+  display: block;
+  line-height: 0;
+}
+.responsive-picture img {
+  width: 100%;
+}
+/************************************************
+PLaceholder Small Hero Default Styles
+************************************************/
+.placeholder {
+  background-color: lightgrey;
+  text-align: center;
+  padding: 10px 0;
+}
+h3.smallhero-header {
+  font-size: 1.25em;
+  color: #464646;
+}
+h3.smallhero-tagline {
+  color: #646464;
+  font-style: normal;
+  padding: 0;
+}
+/************************************************
+PLaceholder Hero Unit Default Styles
+************************************************/
+.placeholder-hero {
+  background-color: lightgrey;
+  text-align: left;
+  padding: 10px 0 10px 20px;
+}
+h1.hero-header {
+  color: #464646;
+}
+p.hero-tagline {
+  color: #646464;
+  font-style: normal;
+  padding: 0;
+}
+/************************************************
+ Address Default Styles
+************************************************/
+address,
+address > p,
+address > a {
+  line-height: 1.7;
+}
+address > a {
+  font-size: 0.875em;
+  display: block;
+}
+/************************************************
+Social Default Styles
+************************************************/
+.social-media {
+  display: block;
+}
+.social-media * {
+  font-family: 'coffeecup-font-icons' !important;
+  color: #444;
+  background-color: transparent;
+}
+.social-media li {
+  display: inline;
+  padding: 2px;
+}
+/************************************************
+Social Element Default Styles
+************************************************/
+.social-element {
+  display: inline-block;
+  text-align: center;
+}
+.social-element a.social-label {
+  text-align: center;
+  font-family: Georgia, Times, 'Times New Roman', serif;
+  display: block;
+}
+.social-image {
+  background-color: #525252;
+  border-radius: 3px 3px;
+  max-width: 32px;
+  display: inline-block;
+}
+.social-image img {
+  margin: 0 auto;
+  max-width: 100%;
+  display: block;
+}
+/************************************************
+Container element (holder) Styles
+************************************************/
+.container:after,
+.container-fluid:after,
+.form-container:after,
+[class*=callout]:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/************************************************
+Span Styles
+************************************************/
+span.text-element {
+  display: block;
+  line-height: 1.2;
+  font-size: 0.875em;
+}
+/************************************************
+Font Icon element Styles
+************************************************/
+span.glyph,
+a.glyph {
+  font-size: 40px;
+  display: block;
+  color: #000000;
+  text-decoration: none;
+}
+span.glyph i,
+a.glyph i {
+  line-height: 1;
+}
+/************************************************
+Button element Styles
+************************************************/
+.image-for-button {
+  height: auto;
+  overflow: hidden;
+  width: 100%;
+  max-width: 24px;
+  display: inline-block;
+  vertical-align: inherit;
+}
+.image-for-button picture {
+  max-width: none;
+  height: auto;
+  display: block;
+  line-height: 0;
+}
+.image-for-button img {
+  width: 100%;
+}
+button.button-glyph,
+button.button-image {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+span.glyph-for-button,
+a.glyph-for-button {
+  font-size: 22px;
+  text-decoration: none;
+}
+span.glyph-for-button i,
+a.glyph-for-button i {
+  line-height: 1;
+}
+a[class*='link-button'] .image-for-button {
+  vertical-align: middle;
+}
+/************************************************
+ Video Element Styles
+************************************************/
+.responsive-slider-video {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+}
+.responsive-slider-video.square {
+  padding-bottom: 120%;
+  max-width: initial;
+}
+.responsive-slider-video iframe,
+.responsive-slider-video object,
+.responsive-slider-video embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+/************************************************
+ Link Default Styles
+************************************************/
+a {
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+  -webkit-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-duration: 0s;
+  transition-duration: 0s;
+  -webkit-transition-property: all;
+  transition-property: all;
+}
+a.link-image-1-1,
+a.link-image-2-1,
+a.link-image-1-2,
+a.link-image-3-2,
+a.link-image-4-3 {
+  display: block;
+  max-width: 200px;
+}
+a.link-image-1-1 img,
+a.link-image-2-1 img,
+a.link-image-1-2 img,
+a.link-image-3-2 img,
+a.link-image-4-3 img {
+  max-width: 200px;
+  width: 100%;
+}
+/************************************************
+ Framework Fixes
+************************************************/
+.rule {
+  padding: 5px 0;
+  width: 100%;
+  margin: 7px 0;
+}
+.rule hr {
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-top: 1px solid #dddddd;
+  width: 100%;
+  max-width: none;
+}
+/************************************************
+ Default q and code tags Styles
+************************************************/
+code {
+  font-family: Consolas, monaco, monospace;
+}

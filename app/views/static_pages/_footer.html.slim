@@ -1,0 +1,34 @@
+div class="row footer-row"
+  div class="columns small-12 column-1 medium-12"
+    div class="container social-container"
+      a href="#{@site.google_link.content}" target="_blank" class="social-image social-button"
+        img class="googleplus-icon" src="#{asset_path("socialicons/webicon-googleplus.png")}" alt="G+"
+      a href="#{@site.linkedin_link.content}" target="_blank" class="social-image social-button"
+        img class="linkedin-icon" src="#{asset_path("socialicons/webicon-linkedin.png")}" alt="Fb"
+      a href="#{@site.twitter_link.content}" target="_blank" class="social-image social-button"
+        img class="twitter-icon" src="#{asset_path("socialicons/webicon-twitter.png")}" alt="Twit"
+div class="row footer-row"
+  div class="columns small-12 column-4"
+    h1 class="heading-1"
+      span class="heading-text-3" © 2017 Precidix, LLC
+    p class="paragraph footer-paragraph"
+      ' This theme is made using
+      a href="http://www.coffeecup.com/foundation-framer" Founding Farmer
+      '  - Copyright ©
+      a href="http://www.coffeecup.com/" CoffeeCup Software
+javascript:
+  $(document).foundation();
+  $(function() {
+    $('a[href*=#]:not([href=#])').click(function() {
+      if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+        if (target.length) {
+          $('html,body').animate({
+            scrollTop: target.offset().top
+          }, 1000);
+          return false;
+        }
+      }
+    });
+  });

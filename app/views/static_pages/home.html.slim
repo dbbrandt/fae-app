@@ -1,0 +1,8 @@
+== render :partial => 'static_pages/responsive_banner', :locals => { title: @site.title,  intro: @site.headline.content }
+div class="row section-headling-row"
+  div class="columns small-12 column-5"
+    h1 class="quotes-heading"
+      span class="heading-text-2" Projects
+  - for job in @jobs do
+    == render :partial => 'static_pages/job',
+            :locals => { title: job.title, image: job.job_image.asset.url, url: job.job_link, copy: job.body }

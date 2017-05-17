@@ -1,0 +1,8 @@
+header.row.homepage-header.narrow style="background-image: url(#{@site.image_narrow.asset.url})"
+  == render :partial  => 'static_pages/banner', :locals => { title: title,  intro: intro }
+
+header.row.homepage-header.medium style="background-image: url(#{@site.image_medium.asset.url})"
+  == render :partial => 'static_pages/banner', :locals => {title: title, intro: intro}
+
+header.row.homepage-header.wide style="background-image: url(#{@site.image_wide.asset.url})"
+  == render :partial => 'static_pages/banner', :locals => {title: title, intro: intro}
