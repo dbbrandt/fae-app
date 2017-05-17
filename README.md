@@ -85,6 +85,42 @@ This site will have two static pages, home and about. It will also have dynamic 
 
 ####We will begin with the About Us page
 
+Starting with about_us turned out to have issues resulting in the need to take a little side trip. 
+
+#####Side note about inflectors needed for "about_us"
+
+When you convert the path `about_us` to a class you get the annoying result "AboutU". Apparently U is the singular of Us.
+
+``` 
+>> "about_us".classify
+"AboutU"
+```
+
+Since the page class is `AboutUs`, we need to tell ActiveSupport::Inflector, which defines the classify method, to get it right! [ActiveSupport](http://guides.rubyonrails.org/active_support_core_extensions.html) *'is the Ruby on Rails component responsible for providing Ruby language extensions, utilities, and other transversal stuff.'*
+
+Rails creates a file `config/initializers/inflectors.rb` where you can modify inflection rules. Modification start are commented out when a Rails application is generated. I have added back one to deal with "about_us".
+
+```
+# Be sure to restart your server when you modify this file.
+
+# Add new inflection rules using the following format. Inflections
+# are locale specific, and you may define rules for as many different
+# locales as you wish. All of these examples are active by default:
+ ActiveSupport::Inflector.inflections(:en) do |inflect|
+#   inflect.plural /^(ox)$/i, '\1en'
+#   inflect.singular /^(ox)en/i, '\1'
+#   inflect.irregular 'person', 'people'
+   inflect.uncountable %w( about_us )
+ end
+
+# These inflection rules are supported but not enabled by default:
+# ActiveSupport::Inflector.inflections(:en) do |inflect|
+#   inflect.acronym 'RESTful'
+# end
+```
+
+#####Back to creating the about us page....
+
 Let's generate the About Us static page. This is similar to a generating a Rails scaffold but generates the fae files for administering the page content.     
 `rails g fae:page AboutUs intro:text hero_image:image headline:string body:text profile_link:string profile_image:image`
 
@@ -235,37 +271,6 @@ The show method does all the work. It first turns the page parameter into a clas
 
 Here we also instantiate the SitePage object for the common attributes used on every page. I will skip the JobExperience explanation as it will be covered later.
 
-#####Side note about inflectors needed for "about_us"
-
-Whey you `classify` the path `about_us` you get the annoying result "AboutU". Apparently U is the singular of Us.
-
-``` 
->> "about_us".classify
-"AboutU"
-```
-
-Since the static page class is `AboutUs`, we need to tell ActiveSupport::Inflector, which defines the classify method, to get it right! [ActiveSupport](http://guides.rubyonrails.org/active_support_core_extensions.html) *'is the Ruby on Rails component responsible for providing Ruby language extensions, utilities, and other transversal stuff.'*
-
-Rails creates a file `config/initializers/inflectors.rb` where you can modify inflection rules. Modification start are commented out when a Rails application is generated. I have added back one to deal with "about_us".
-
-```
-# Be sure to restart your server when you modify this file.
-
-# Add new inflection rules using the following format. Inflections
-# are locale specific, and you may define rules for as many different
-# locales as you wish. All of these examples are active by default:
- ActiveSupport::Inflector.inflections(:en) do |inflect|
-#   inflect.plural /^(ox)$/i, '\1en'
-#   inflect.singular /^(ox)en/i, '\1'
-#   inflect.irregular 'person', 'people'
-   inflect.uncountable %w( about_us )
- end
-
-# These inflection rules are supported but not enabled by default:
-# ActiveSupport::Inflector.inflections(:en) do |inflect|
-#   inflect.acronym 'RESTful'
-# end
-```
 
 
 ####Creating the Views
@@ -468,7 +473,13 @@ class StaticPagesController < ApplicationController
 
 ###Done!
 
-I found this exercise to be a great learning tool for Rails 5 and a challenging introduction to fae-cms. Fae-cms is tempting to use as a general application site builder. For simple sites it may well be a great way to quickly get something up and running. If you become an expert in Fine's implementation, you may want to use it, extend or even fork it to be your go to website framework like at Fine. Enjoy!
+Start up the site with `rails s` and you will see a pretty empty page. Goto `localhost:3000\admin` and enter content into the *Pages/About Us*, *Pages/Site* and at least one Job Experience to see some decent content.
+The banner image is made up of three responsive banner image sizes. I have included one in the public directory that can be used for all three. 
+As a nice exercise, you can enhance the app to have the small image default for all three.
+
+I found this exercise to be a great learning tool for Rails 5 and a challenging introduction to fae-cms. Fae-cms is tempting to use as a general application site builder. 
+For simple sites it may well be a great way to quickly get something up and running. 
+If you become an expert in Fine's implementation, you may want to use it, extend or even fork it to be your go to website framework like at Fine. Enjoy!
  
 
 

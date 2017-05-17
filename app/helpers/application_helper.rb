@@ -4,6 +4,6 @@ module ApplicationHelper
                                        no_intra_emphasis: true,
                                        fenced_code_blocks: true,
                                        disable_indented_code_blocks: true)
-    return markdown.render(text).html_safe
+    return markdown.render(text).html_safe if text
   end
 end

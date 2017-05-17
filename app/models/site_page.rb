@@ -10,7 +10,7 @@ class SitePage < Fae::StaticPage
       image_medium: { type: Fae::Image },
       image_wide: { type: Fae::Image },
       google_link: { type: Fae::TextField },
-      linkekin_link: { type: Fae::TextField },
+      linkedin_link: { type: Fae::TextField },
       twitter_link: { type: Fae::TextField }
     }
   end
