@@ -1,17 +1,17 @@
 # README
 
-##Objective: Learn about fae-cms and brush up on Rails 5
+## Objective: Learn about fae-cms and brush up on Rails 5
 
-###Background
-I've been developing with Ruby for about six years following a dozen years or more of Java. I generally focus on server and infrastructure development. Around 2009 I started looking at Groovy (Grails), a dynamic language that runs in the JVM. I used it in a consulting project to build a vertical social networking site for a client. It was pretty cool but it still had all the baggage and complexity of the Java ecosystem and it's libraries. It did make delivering a full stack app relatively easy with some help from a designer on the HTML/CMS.
+### Background
+I've been developing with Ruby for about six years following a dozen years or more of Java. I generally focus on server and infrastructure development. Around 2009 I started looking at Groovy (Grails), a dynamic language that runs in the JVM. I used it in a consulting project to build a vertical social networking site for a client. It was pretty cool but it still had all the baggage and complexity of the Java ecosystem and its libraries. It did make delivering a full stack app relatively easy with some help from a designer on the HTML/CMS.
 
-###For the love of Ruby
+### For the love of Ruby
 I love Ruby! It's fun. Yes, there are many ways to do the same thing but isn't that just like the real world? It leaves a lot of room for creativity. 
 
 I was introduced to Ruby in the context of Rails 3. There is a downside to starting Ruby with Rails in that you spend more time learning about Rails conventions and less on the Ruby language. After a few years I got involved with a great project that was pure Ruby. Any features needed were added with individual gems. For example, the ORM we used was Sequel, a powerful alternative to ActiveRecord. 
 
-###Brushing up on Rails with FAE-CMS
-This blog is about coming back to Rails 5 and having to get back up to speed with the Rails framework in it's latest incarnation. 
+### Brushing up on Rails with FAE-CMS
+This blog is about coming back to Rails 5 and having to get back up to speed with the Rails framework in its latest incarnation. 
 
 I was rusty with Rails. I was:
 
@@ -22,7 +22,7 @@ I was rusty with Rails. I was:
 
 At the same time, I was looking to build a personal consulting site that could host a blog. At about that time, I came across [fae-cms](https://www.faecms.com/documentation) which was created and recently open-sourced by [Fine Design Group](https://www.wearefine.com/). It is a Rails 5 based content management system (CMS), more a framework than a full CMS and packaged as a gem. I has reasonable hooks to and features with and extend for your own needs. I decided, why not evaluate it while building my site. Fae-cms was developed by Fine as an internal project to accelerate custom site development. If it works for them, maybe I could use it to build a general purpose site that supports blogging.
 
-###A novice's guide to using fae-cms
+### A novice's guide to using fae-cms
 
 _What you need to get started:_
 
@@ -49,11 +49,11 @@ Fae-cms is based on responsive design so, of course, we will build the static pa
 ![Precidix Site](http://www.precidix.com/blogs/Precidix-site-cutout.png)
 
 
-####Using CoffeCup Responsive Site Desinger to build my pages
+#### Using CoffeCup Responsive Site Desinger to build my pages
 
 As a primarily back end developer, I'm not an expert at designing a stylish responsive site. I decided to use [CoffeeCup](http://www.coffeecup.com/designer/), another great tool which does the job and is a nice way learn responsive site design through an interactive UX. Once done, it generates all the necessary files. I got what I needed and easily created the HTML, CSS and Javascript to do the home and about pages.
 
-##So let's get started!
+## So let's get started!
 
 1. Create a new project locally   
 `rails new  fae-app`
@@ -79,15 +79,15 @@ As a primarily back end developer, I'm not an expert at designing a stylish resp
 
 ![Fae startup page](http://www.precidix.com/blogs/Fae-first-time-login.png)
 
-###Next we customize for our requirements
+### Next we customize for our requirements
 
-This site will have two static pages, home and about. It will also have dynamic content for the job experience shown on the home page. Fae-cms supports a special controller and models for static pages. Like most CMS's, fae-cms stores content for it's static pages in generic content tables. It also supports regular models for storing any relational data that can be injected into your static pages. For both types of models, static page and ActiveRecord, fae-cms generates the admin pages for you. 
+This site will have two static pages, home and about. It will also have dynamic content for the job experience shown on the home page. Fae-cms supports a special controller and models for static pages. Like most CMS's, fae-cms stores content for its static pages in generic content tables. It also supports regular models for storing any relational data that can be injected into your static pages. For both types of models, static page and ActiveRecord, fae-cms generates the admin pages for you. 
 
-####We will begin with the About Us page
+#### We will begin with the About Us page
 
 Starting with about_us turned out to have issues resulting in the need to take a little side trip. 
 
-#####Side note about inflectors needed for "about_us"
+##### Side note about inflectors needed for "about_us"
 
 When you convert the path `about_us` to a class you get the annoying result "AboutU". Apparently U is the singular of Us.
 
@@ -119,7 +119,7 @@ Rails creates a file `config/initializers/inflectors.rb` where you can modify in
 # end
 ```
 
-#####Back to creating the about us page....
+##### Back to creating the about us page....
 
 Let's generate the About Us static page. This is similar to a generating a Rails scaffold but generates the fae files for administering the page content.     
 `rails g fae:page AboutUs intro:text hero_image:image headline:string body:text profile_link:string profile_image:image`
@@ -158,7 +158,7 @@ end
 
 For this StaticPage model, I added an extra validation. This validation must be defined inside the fae_fields attribute declaration block. Fae provides a range of [validation helpers](https://www.faecms.com/documentation/topics-models#validation) for the more common, non-trivial validations. See the `profile_link` field above for url validation. 
 
-####Modify the admin menu structure as desired.
+#### Modify the admin menu structure as desired.
 
 The admin menu is generated by a model concern. A file, `app/models/concerns/fae/navigation_concern.rb` is created with a default menu. I added a sub-menu structure to the basic layout to provide for longer term requirements. 
 
@@ -177,13 +177,13 @@ Now, you can go into the admin site and fill in the content for the About Us pag
 
 ![about us page](http://www.precidix.com/blogs/Fae-static-page-admin.png)
 
-###Fae-cms only generates admin views
+### Fae-cms only generates admin views
 
 This is somewhat confusing when you think of a normal CMS. Fae-cms just creates admin pages and it's up to you to leverage their framework to create the actual site. The admin pages can be used to maintain your pages and content. 
 
 We now need to add views to the site to make use of what was generated in the admin site. Fae-cms documentation is pretty good but it seems to end before you see how to use it to make a site. It assume you have reviewed their sourced code and really know what your are doing.
 
-####Home Page
+#### Home Page
 We started with About Us because all of its data is defined in the StaticPage model. The home page requirements are more complicated. 
 
 *GOAL* - Create a Static home page that leverages an Fae::StagicPage model to populate the common data on the home page and create a JobExperience model to populate the grid on the home page. 
@@ -223,11 +223,11 @@ class SitePage < Fae::StaticPage
 end
 ```
 
-###Now how do I build an actual site
+### Now how do I build an actual site
 
 At this point, we still only have an admin site. This is where you start to lean on prior Rails knowledge. You have to create the controllers and views to support the static page data you created in fae's admin pages. The current documentation on Fine doesn't have examples of how to do this. We need to figure out how to get access to the data stored in FAE content tables on our site pages.
 
-####Using Fae::StaticPages
+#### Using Fae::StaticPages
 
 I looked through all the documentation an couldn't find any instructions on how to do this. I felt at a loss and frustrated with what I assumed was my lack of sufficient Rails expertise. So, I looked at the source code since this is and open-source project.
 
@@ -235,7 +235,7 @@ I began to understand how an FAE:StaticPage is dynamically created from the meta
 
 For the AboutUs page, this is done by the statement, `@about_us = AboutUs.instance`. This instantiates the object and adds all the fields and their values as stored in the database.
 
-####A generic static page controller
+#### A generic static page controller
 
 You could create a controller and related views for each static page. Since these pages are basically static, there is not much special logic in each controller. This is a case for a common controller with and some meta programming. 
 
@@ -273,7 +273,7 @@ Here we also instantiate the SitePage object for the common attributes used on e
 
 
 
-####Creating the Views
+#### Creating the Views
                        
 We created a controller, `static_page_controller`, that will route to the view based on the page name. We now have to create the views `home.html.slim` and `about_us.html.slim` in the `app/views/static_pages` directory. This is where get into our *asset pipeline, slim and responsive design skills.*
 
@@ -303,7 +303,7 @@ about_us.html.slim
 
 This involved breaking up the html into its parts and converting them to slim. It turned out to be pretty straight forward and a good way to learn the implementation of responsive design done by CoffeeCup. 
 
-####Altering generated assets for the asset-pipeline
+#### Altering generated assets for the asset-pipeline
 
 After adding the coffee_cup fonts, you need to modify the `foundation.css` to use asset_url() instead of the standard url() to reference font files. You also need to remove the relative path, in this case `../fonts` as this is handled by the Rails asset pipeline.
 
@@ -315,7 +315,7 @@ After these changes:
 
 Images references also need to be changed when they are placed in `app\assets\images`. They will look something like `img src=“#{asset_path(“image.png”)}”`.
 
-####Accessing the FAE model data in the view
+#### Accessing the FAE model data in the view
 
 Fae-cms populates an @item or @items variable to store the model data or an array of models for the index page. For static pages, here is how you reference the @item data in your view based on the attribute type:
 
@@ -340,7 +340,7 @@ div class="row section-headling-row"
             :locals => { title: job.title, image: job.job_image.asset.url, url: job.job_link, copy: job.body }
 ```
 
-####Text as markdown
+#### Text as markdown
 
 The textarea field type supports a markdown editor. To display these, you need to add a gem and an application_helper.
 
@@ -360,7 +360,7 @@ end
 
 In the view, simply put `#{markup @item.body.content}` where  `body` is an example of a textarea field containing markdown.
 
-####Page Layout
+#### Page Layout
 
 In the `views/layouts/application.html.slim` we add code to include content loaded into every page.
 
@@ -373,7 +373,7 @@ In the `views/layouts/application.html.slim` we add code to include content load
     == render 'static_pages/footer'
 ```
 
-####Adding non-StaticPage data to your pages
+#### Adding non-StaticPage data to your pages
 
 For this site, we want show job experience on the home page. This includes multiple records on a single Home page. StaticPages only have a single instance of data. 
 
@@ -471,7 +471,7 @@ class StaticPagesController < ApplicationController
 
 * Use the new `@jobs` variable in the home page to iterate through the jobs and display a partial for each job. See the `home.html.slim` in the section *Accessing the FAE model data in the view* for the source code.
 
-###Done!
+### Done!
 
 Start up the site with `rails s` and you will see a pretty empty page. Goto `localhost:3000\admin` and enter content into the *Pages/About Us*, *Pages/Site* and at least one Job Experience to see some decent content.
 The banner image is made up of three responsive banner image sizes. I have included one in the public directory that can be used for all three. 
