@@ -34,7 +34,7 @@ _What you need to get started:_
 
 _What you will build_
 
-The plan is to build a responsive site with a home page that lists job experience and an about page that is acts as a mini CV. We want to use fae-cms to manage all the data needed for the pages so the static content can be updated and stored in the database. 
+The plan is to build a responsive site with a home page that lists job experience and an about page that acts as a mini CV. We want to use fae-cms to manage all the data needed for the pages so the static content can be updated and stored in the database. 
 
 _The admin pages are all generated for you._
 
@@ -56,25 +56,29 @@ As a primarily back end developer, I'm not an expert at designing a stylish resp
 ## So let's get started!
 
 1. Create a new project locally   
-`rails new  fae-app`
+`rails new fae-app`
+`cd fae-app`   
+If you have issues compiling native gem's on OSX you may need to install the Xcode command line tools.
+`xcode-select --install`
 2. Add the *fae-rails* gem to the Gemfile   
 `# The Rails CMS`  
 `gem 'fae-rails'`
-4. Add the slim gem to generate slim rather than erb views. [Slim](http://www.rubydoc.info/gems/slim/frames) is an alternative to HAML with a slightly different syntax. Since FAE uses slim, it mades sense to use it for the other pages. It's efficient and to HAML.   
+3. Add the slim gem to generate slim rather than erb views. [Slim](http://www.rubydoc.info/gems/slim/frames) is an alternative to HAML with a slightly different syntax. Since FAE uses slim, it mades sense to use it for the other pages. It's efficient and similar to HAML.   
 `# Use SLIM for HTML`   
 `gem 'slim-rails', '~> 3.1'`
-5. Install a gem, `redcarpet`, to allow us to use markdown in our text field content. Fae-cms provides a markdown editor out of the box.   
-`# Used to render markup text fields as HTML`
+4. Install a gem, `redcarpet`, to allow us to use markdown in our text field content. Fae-cms provides a markdown editor out of the box.   
+`# Used to render markup text fields as HTML`   
 `gem 'redcarpet', '~> 3.4'`
-6. Run bundler   
-`bundle install`
-`Note I had some issues on OSX and had to install an older version of image magic to get the native builds to succeed`
-7. Initialize and generate the fae-cms code and tables.   
-`rails g fae:install`   
-8. Convert the `app/views/layouts` generated as `*.html.erb` to `.html.slim`. This releates to three files: `application.html.slim, mailer.html.slim, mailer.text.slim` 
-9. Started up the server.   
+5. Run bundler   
+`bundle install` or just `bundle` which defaults to install.
+`Note I had some issues on OSX and had to install an older version of ImageMagick to get the native builds to succeed`   
+[This stackoverflow posting helped me](http://stackoverflow.com/questions/41647979/imagemagick-7-with-rmagick-2-16-on-macos-sierra-cant-find-magickwand-h)
+6. Initialize and generate the fae-cms code and tables.   
+`rails generate fae:install` or `rails g fae:install` for short.   
+7. Convert the `app/views/layouts` generated as `*.html.erb` to `.html.slim`. This releates to three files: `application.html.slim, mailer.html.slim, mailer.text.slim` 
+8. Started up the server.   
 `rails s`
-10. Setup the fae-cms super-user in the browser. Fae-cms has a first time init user page.
+9. Setup the fae-cms super-user in the browser. Fae-cms has a first time init user page.
 `http://localhost:3000/admin`
 
 ![Fae startup page](http://www.precidix.com/blogs/Fae-first-time-login.png)
@@ -85,7 +89,74 @@ This site will have two static pages, home and about. It will also have dynamic 
 
 #### We will begin with the About Us page
 
-Starting with about_us turned out to have issues resulting in the need to take a little side trip. 
+Let's generate the About Us static page. This is similar to a generating a Rails scaffold but generates the fae files for administering the page content.     
+
+* First, edit the `config/initializers/inflectors.rb` and tell Rails how to classify about_us. You can read the details about this below.
+
+```
+ ActiveSupport::Inflector.inflections(:en) do |inflect|
+#   inflect.plural /^(ox)$/i, '\1en'
+#   inflect.singular /^(ox)en/i, '\1'
+#   inflect.irregular 'person', 'people'
+   inflect.uncountable %w( about_us )
+ end
+```
+
+* Generate the AboutUs static page
+`rails g fae:page AboutUs intro:text hero_image:image headline:string body:text profile_link:string profile_image:image`
+
+Output:   
+`create  app/controllers/admin/content_blocks_controller.rb`   
+`create  app/models/about_us_page.rb`   
+`create  app/views/admin/content_blocks/about_us.html.slim`
+
+An `about_us_page.rb` is created which declares an Fae::StaticPage model and its attribute explicitely. Fae-cms stores these attributes in its generic content tables rather than using standard ActiveRecord to store them in a model specific table.
+
+Here is the AboutUs model in `about_us_page.rb` 
+
+```
+class AboutUsPage < Fae::StaticPage
+
+  @slug = 'about_us'
+
+  # required to set the has_one associations, Fae::StaticPage will build these associations dynamically
+  def self.fae_fields
+    {
+      intro: { type: Fae::TextField },
+      hero_image: { type: Fae::Image },
+      headline: { type: Fae::TextField },
+      body: { type: Fae::TextArea },
+      profile_link: {
+          type: Fae::TextField,
+          validates: Fae.validation_helpers.url  # I added this line for additional validation (described below) 
+      },
+      profile_image: { type: Fae::Image }
+    }
+  end
+end
+```
+
+For this StaticPage model, I added an extra validation. This validation must be defined inside the fae_fields attribute declaration block. Fae provides a range of [validation helpers](https://www.faecms.com/documentation/topics-models#validation) for the more common, non-trivial validations. See the `profile_link` field above for url validation. 
+
+#### Modify the admin menu structure as desired.
+
+The admin menu is generated by a model concern. A file, `app/models/concerns/fae/navigation_concern.rb` is created with a default menu. I added a sub-menu structure to the basic layout to provide for longer term requirements. 
+
+```
+def structure
+  [
+    item('Pages', subitems: [
+      item('About Us', path: fae.edit_content_block_path('about_us'))
+    ])
+  ]
+end
+```
+
+Now, you can go into the admin site and fill in the content for the About Us page. So far all we have is  data but no webpage view. 
+`http://localhost:3000/admin/content_blocks/about_us`
+
+![about us page](http://www.precidix.com/blogs/Fae-static-page-admin.png)
+
 
 ##### Side note about inflectors needed for "about_us"
 
@@ -119,63 +190,7 @@ Rails creates a file `config/initializers/inflectors.rb` where you can modify in
 # end
 ```
 
-##### Back to creating the about us page....
 
-Let's generate the About Us static page. This is similar to a generating a Rails scaffold but generates the fae files for administering the page content.     
-`rails g fae:page AboutUs intro:text hero_image:image headline:string body:text profile_link:string profile_image:image`
-
-Output:   
-`create  app/controllers/admin/content_blocks_controller.rb`   
-`create  app/models/about_us_page.rb`   
-`create  app/views/admin/content_blocks/about_us.html.slim`
-
-
-An `about_us_page.rb` is created which declares an Fae::StaticPage model and its attribute explicitely. Fae-cms stores these attributes in its generic content tables rather than using standard ActiveRecord to store them in a model specific table.
-
-Here is the AboutUs model in `about_us_page.rb` 
-
-```
-class AboutUsPage < Fae::StaticPage
-
-  @slug = 'about_us'
-
-  # required to set the has_one associations, Fae::StaticPage will build these associations dynamically
-  def self.fae_fields
-    {
-      intro: { type: Fae::TextField },
-      hero_image: { type: Fae::Image },
-      headline: { type: Fae::TextField },
-      body: { type: Fae::TextArea },
-      profile_link: {
-          type: Fae::TextField,
-          validates: Fae.validation_helpers.url
-      },
-      profile_image: { type: Fae::Image }
-    }
-  end
-end
-```
-
-For this StaticPage model, I added an extra validation. This validation must be defined inside the fae_fields attribute declaration block. Fae provides a range of [validation helpers](https://www.faecms.com/documentation/topics-models#validation) for the more common, non-trivial validations. See the `profile_link` field above for url validation. 
-
-#### Modify the admin menu structure as desired.
-
-The admin menu is generated by a model concern. A file, `app/models/concerns/fae/navigation_concern.rb` is created with a default menu. I added a sub-menu structure to the basic layout to provide for longer term requirements. 
-
-```
-def structure
-  [
-    item('Pages', subitems: [
-      item('About Us', path: fae.edit_content_block_path('about_us'))
-    ])
-  ]
-end
-```
-
-Now, you can go into the admin site and fill in the content for the About Us page. So far all we have is  data but no webpage view. 
-`http://localhost:3000/admin/content_blocks/about_us`
-
-![about us page](http://www.precidix.com/blogs/Fae-static-page-admin.png)
 
 ### Fae-cms only generates admin views
 
