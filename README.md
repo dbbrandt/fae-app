@@ -306,6 +306,7 @@ All style sheets can be changed from `.css` to `.scss` to support the added feat
 
 Finally, we want to make menus, banners and footers reusable so we will factor out some html into partials. Here is what I ended up creating:
 
+app/views/static_pages/
 ```
 _banner.html.slim               
 _job.html.slim                  
@@ -315,6 +316,9 @@ _responsive_banner.html.slim
 home.html.slim
 about_us.html.slim
 ```
+The files above can be found in the fae-app github repo and they were built from the output of Responsive Site Designer.
+The theme used in Designer was called *Technologic*. 
+
 
 This involved breaking up the html into its parts and converting them to slim. It turned out to be pretty straight forward and a good way to learn the implementation of responsive design done by CoffeeCup. 
 
@@ -377,9 +381,26 @@ In the view, simply put `#{markup @item.body.content}` where  `body` is an examp
 
 #### Page Layout
 
-In the `views/layouts/application.html.slim` we add code to include content loaded into every page.
+In the `views/layouts/application.html.slim` we add code to include content loaded into every page. 
 
 ```
+doctype html
+html
+  head
+    meta charset="utf-8"
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    meta name="description" content="fantastic"
+    meta name="keywords" content=""
+    meta name="generator" content="Responsive Site Designer 2.0.2044 - Trial Version"
+    meta name="author" content="Precidix LLC"
+    = favicon_link_tag 'favicon.ico'
+    title Index
+    = stylesheet_link_tag "application"
+
+    javascript:
+        document.createElement( "picture" );
+    = javascript_include_tag "application"
+
   body
     == render 'static_pages/menu'
 
