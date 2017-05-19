@@ -205,8 +205,8 @@ We started with About Us because all of its data is defined in the StaticPage mo
 
 On this site, every page has some common data including a menu, banner image and footer. Rather than generating an explicit static home page, I decided to create a generic *Site* StaticPage with common fields. This Site StaticPage is used to populate the shared parts of all the pages on the site.
 
-Generate a generic static pages controller.
-`rails generate controller StaticPages home`
+Generate a generic static pages controller.   
+`rails g controller StaticPages home`
 
 
 
