@@ -10,7 +10,7 @@ I love Ruby! It's fun. Yes, there are many ways to do the same thing but isn't t
 
 I was introduced to Ruby in the context of Rails 3. There is a downside to starting Ruby with Rails in that you spend more time learning about Rails conventions and less on the Ruby language. After a few years I got involved with a great project that was pure Ruby. Any features needed were added with individual gems. For example, the ORM we used was Sequel, a powerful alternative to ActiveRecord. 
 
-### Brushing up on Rails with FAE-CMS
+### Brushing up on Rails with fae-cms
 This blog is about coming back to Rails 5 and having to get back up to speed with the Rails framework in its latest incarnation. 
 
 I was rusty with Rails. I was:
@@ -23,6 +23,8 @@ I was rusty with Rails. I was:
 At the same time, I was looking to build a personal consulting site that could host a blog. At about that time, I came across [fae-cms](https://www.faecms.com/documentation) which was created and recently open-sourced by [Fine Design Group](https://www.wearefine.com/). It is a Rails 5 based content management system (CMS), more a framework than a full CMS and packaged as a gem. I has reasonable hooks to and features with and extend for your own needs. I decided, why not evaluate it while building my site. Fae-cms was developed by Fine as an internal project to accelerate custom site development. If it works for them, maybe I could use it to build a general purpose site that supports blogging.
 
 ### A novice's guide to using fae-cms
+
+I've provided a [sample project](https://github.com/dbbrandt/fae-app) built in this tutorial in Github.
 
 _What you need to get started:_
 
