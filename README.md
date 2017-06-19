@@ -77,6 +77,7 @@ If you have issues compiling native gem's on OSX you may need to install the Xco
 [This stackoverflow posting helped me](http://stackoverflow.com/questions/41647979/imagemagick-7-with-rmagick-2-16-on-macos-sierra-cant-find-magickwand-h)
 6. Initialize and generate the fae-cms code and tables.   
 `rails generate fae:install` or `rails g fae:install` for short.   
+`rails fae:seed_db` to populate the necessary fae data. 
 7. Convert the `app/views/layouts` generated as `*.html.erb` to `.html.slim`. This releates to three files: `application.html.slim, mailer.html.slim, mailer.text.slim` 
 8. Started up the server.   
 `rails s`
